@@ -28,6 +28,7 @@
 		brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
 		default-brightness-level = <8>;
 		enable-gpios = <&pio 7 10 GPIO_ACTIVE_HIGH>; /* PH10 */
+		power-supply = <&reg_ps>;
 	};
 
 	bt_sco_codec: bt-sco-codec {
@@ -70,6 +71,14 @@
 			label = "pinephone:red:user";
 			gpios = <&pio 3 19 GPIO_ACTIVE_HIGH>; /* PD19 */
 		};
+	};
+
+	reg_ps: ps {
+		compatible = "regulator-fixed";
+		regulator-name = "ps";
+		regulator-always-on;
+		regulator-boot-on;
+		vin-supply = <&battery_power_supply>;
 	};
 
 	reg_usb0_vbus: usb0-vbus {
@@ -416,6 +425,7 @@
 	regulator-min-microvolt = <2800000>;
 	regulator-max-microvolt = <2800000>;
 	regulator-name = "dovdd-csi";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_aldo2 {
@@ -423,6 +433,7 @@
 	regulator-min-microvolt = <1800000>;
 	regulator-max-microvolt = <1800000>;
 	regulator-name = "vcc-pl";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_aldo3 {
@@ -430,6 +441,7 @@
 	regulator-min-microvolt = <2700000>;
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-pll-avcc";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dcdc1 {
@@ -437,6 +449,7 @@
 	regulator-min-microvolt = <3300000>;
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-3v3";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dcdc2 {
@@ -444,6 +457,7 @@
 	regulator-min-microvolt = <1000000>;
 	regulator-max-microvolt = <1300000>;
 	regulator-name = "vdd-cpux";
+	vin-supply = <&reg_ps>;
 };
 
 /* DCDC3 is polyphased with DCDC2 */
@@ -453,6 +467,7 @@
 	regulator-min-microvolt = <1200000>;
 	regulator-max-microvolt = <1200000>;
 	regulator-name = "vcc-dram";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dcdc6 {
@@ -460,6 +475,7 @@
 	regulator-min-microvolt = <1100000>;
 	regulator-max-microvolt = <1100000>;
 	regulator-name = "vdd-sys";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dldo1 {
@@ -467,6 +483,7 @@
 	regulator-min-microvolt = <3300000>;
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-dsi-sensor";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dldo2 {
@@ -474,18 +491,21 @@
 	regulator-min-microvolt = <3300000>;
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-mipi-io";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dldo3 {
 	regulator-min-microvolt = <2800000>;
 	regulator-max-microvolt = <2800000>;
 	regulator-name = "avdd-csi";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_dldo4 {
 	regulator-min-microvolt = <1800000>;
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-wifi-io";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_eldo1 {
@@ -493,18 +513,21 @@
 	regulator-min-microvolt = <1800000>;
 	regulator-max-microvolt = <1800000>;
 	regulator-name = "vcc-lpddr";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_eldo3 {
 	regulator-min-microvolt = <1800000>;
 	regulator-max-microvolt = <1800000>;
 	regulator-name = "dvdd-1v8-csi";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_fldo1 {
 	regulator-min-microvolt = <1200000>;
 	regulator-max-microvolt = <1200000>;
 	regulator-name = "vcc-1v2-hsic";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_fldo2 {
@@ -512,6 +535,7 @@
 	regulator-min-microvolt = <1100000>;
 	regulator-max-microvolt = <1100000>;
 	regulator-name = "vdd-cpus";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_ldo_io0 {
@@ -520,6 +544,7 @@
 	regulator-max-microvolt = <3300000>;
 	regulator-name = "vcc-lcd-ctp-stk";
 	status = "okay";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_ldo_io1 {
@@ -527,10 +552,12 @@
 	regulator-max-microvolt = <1800000>;
 	regulator-name = "vcc-1v8-typec";
 	status = "okay";
+	vin-supply = <&reg_ps>;
 };
 
 &reg_rtc_ldo {
 	regulator-name = "vcc-rtc";
+	vin-supply = <&reg_ps>;
 };
 
 &sound {
