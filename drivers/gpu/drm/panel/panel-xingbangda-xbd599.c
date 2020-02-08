@@ -218,12 +218,12 @@ static const struct drm_display_mode xbd599_default_mode = {
 	.type        = DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
 };
 
-static int xbd599_get_modes(struct drm_panel *panel)
+static int xbd599_get_modes(struct drm_panel *panel, struct drm_connector* connector)
 {
 	struct xbd599 *ctx = panel_to_xbd599(panel);
 	struct drm_display_mode *mode;
 
-	mode = drm_mode_duplicate(panel->drm, &xbd599_default_mode);
+	mode = drm_mode_duplicate(connector->dev, &xbd599_default_mode);
 	if (!mode) {
 		DRM_DEV_ERROR(ctx->dev, "Failed to add mode\n");
 		return -ENOMEM;
@@ -232,9 +232,9 @@ static int xbd599_get_modes(struct drm_panel *panel)
 	drm_mode_set_name(mode);
 
 	mode->type = DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED;
-	panel->connector->display_info.width_mm = mode->width_mm;
-	panel->connector->display_info.height_mm = mode->height_mm;
-	drm_mode_probed_add(panel->connector, mode);
+	connector->display_info.width_mm = mode->width_mm;
+	connector->display_info.height_mm = mode->height_mm;
+	drm_mode_probed_add(connector, mode);
 
 	return 1;
 }
@@ -275,7 +275,7 @@ static int xbd599_probe(struct mipi_dsi_device *dsi)
 	if (IS_ERR(ctx->backlight))
 		return PTR_ERR(ctx->backlight);
 
-	drm_panel_init(&ctx->panel);
+	drm_panel_init(&ctx->panel, dev, &xbd599_drm_funcs, DRM_MODE_CONNECTOR_DSI);
 	ctx->panel.dev = dev;
 	ctx->panel.funcs = &xbd599_drm_funcs;
 
