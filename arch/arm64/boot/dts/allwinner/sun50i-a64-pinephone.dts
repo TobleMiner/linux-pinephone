@@ -78,7 +78,7 @@
 		regulator-name = "ps";
 		regulator-always-on;
 		regulator-boot-on;
-		vin-supply = <&battery_power_supply>;
+//		vin-supply = <&battery_power_supply>;
 	};
 
 	reg_usb0_vbus: usb0-vbus {
