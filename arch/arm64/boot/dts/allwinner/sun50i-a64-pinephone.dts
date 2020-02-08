@@ -130,8 +130,8 @@
 };
 
 &codec {
-	pinctrl-names = "default";
-	pinctrl-0 = <&aif2_pins>, <&aif3_pins>;
+//	pinctrl-names = "default";
+//	pinctrl-0 = <&aif2_pins>, <&aif3_pins>;
 	status = "okay";
 };
 
@@ -291,8 +291,8 @@
 
 /* Connected to pogo pins */
 &i2c2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&i2c2_pins>;
+//	pinctrl-names = "default";
+//	pinctrl-0 = <&i2c2_pins>;
 	status = "okay";
 };
 
